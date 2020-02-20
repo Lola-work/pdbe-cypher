@@ -1,8 +1,9 @@
+//Cypher PDBe queries for each scenario discussed at the "Mining PDBe and PDBe-KB using a graph database"
+
+//For a UniProt accession, get every predicted ligand binding site with raw scores and confidence levels, together with information on whether a residue is also on a PPI interface and if there are known variants
 //Get all 3dligandsite and p2rank annotations for a Uniprot residue
 MATCH (unp:UniProt {ACCESSION:'P00441'})-[:HAS_UNP_RESIDUE]->(unpRes:UNP_Residue)<-[:MAP_TO_UNIPROT_RESIDUE]-(pdbRes:PDB_Residue)<-[rel:FUNPDBE_ANNOTATION_FOR]-(fg:FunPDBeResidueGroup)-[:FUNPDBE_RESIDUE_GROUP_OF]->(fe:FunPDBeEntry) WHERE fe.DATA_RESOURCE IN ['3dligandsite','p2rank']
-
 WITH DISTINCT unp, unpRes, fe, rel, [(unpRes)-[:INTERACTS_WITH]->(partner) | partner] as partners, [(unp)<-[:IS_VARIANT_IN]-(variant:UNP_Variant) WHERE toInteger(variant.BEGIN)=toInteger(unpRes.ID) | variant ] AS variants
-
 RETURN toInteger(unpRes.ID) AS unpResidueId, fe.DATA_RESOURCE, COLLECT(toFloat(rel.RAW_SCORE)) AS rawScores, COLLECT(toFloat(rel.CONFIDENCE_SCORE)) AS confScores, 
 CASE
     WHEN SIZE(partners) > 0
@@ -80,7 +81,6 @@ MATCH (uniref90)<-[rel:HAS_UNIREF90_SEGMENT]-(entity:Entity)-[:HAS_PDB_RESIDUE]-
 RETURN COLLECT(DISTINCT boundLigand.AUTH_COMP_ID)
 
 //UniProt range on one side, Pfam domain on the other side, list of PDB, chain?
-
 WITH 'PF00104' AS pfamId, 'Q15596' AS unpAcc, 744 AS unpStart, 750 AS unpEnd
 // Get Pfam domain
 MATCH (pfam:Pfam {PFAM_ACCESSION:pfamId})
