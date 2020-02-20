@@ -43,5 +43,5 @@
 
 16) Get sequence conservations for entry 1d5r
 
-# Meta Queries
+## Meta Queries
 - Find shortest path between two graph nodes in a Neo4j database.
