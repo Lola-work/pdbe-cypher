@@ -39,5 +39,9 @@
 
 14) Monomeric PDBs with single CATH domain
 
+15) All entities from UniRef90 clusters for PDB entry 6cmo
+
+16) Get sequence conservations for entry 1d5r
+
 # Meta Queries
 - Find shortest path between two graph nodes in a Neo4j database.

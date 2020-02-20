@@ -107,3 +107,13 @@ RETURN DISTINCT pr1.UNIQID, r1.AUTH_SEQ_ID, pr1.CHEM_COMP_ID, ch1.AUTH_ASYM_ID, 
 
 //15) All entities from UniRef90 clusters for PDB entry 6cmo
 
+MATCH (entry:Entry {ID:'6cmo'})-[:HAS_ENTITY]->(entity:Entity)-[:HAS_UNIPROT]->(uniprot:UniProt)
+with uniprot as unp
+match (unp)-[:IS_IN_UNIREF90_CLUSTER]->(cluster)<-[:IS_IN_UNIREF90_CLUSTER]-(unf:UniProt)
+MATCH (unf)<-[:HAS_UNIREF90_SEGMENT]-(entity:Entity)
+RETURN cluster.REFERENCE_ACC, unf.ACCESSION, collect(distinct entity.UNIQID)
+
+//16) Get sequence conservations for entry 1d5r
+
+MATCH (entry:Entry {ID:'1d5r'})-[:HAS_ENTITY]->(entity:Entity)-[:HAS_PDB_RESIDUE]->(pdbRes:PDB_Residue)-[:MAP_TO_UNIPROT_RESIDUE]->(unpRes:UNP_Residue)-[rel:HAS_SEQID]->(seq:UniProt_Sequence)
+RETURN unpRes.ID, rel.P_SCORE_A, rel.P_SCORE_C, rel.CONSERVED_SCORE
