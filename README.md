@@ -1,11 +1,11 @@
-## pdbe-cypher
+# pdbe-cypher
 
-# Files included in repo:
+## Files included in repo:
 
 - pdbe_cypher_queries.cql - cypher queries for PDBe and PDBe-KB. Applications of the graph database to biological questions.
 - meta-queries.cql - miscellaneous queries and useful tips and tricks 
 
-# Cypher queries examples for PDBe Neo4j graph database
+## Cypher queries examples for PDBe Neo4j graph database
 
 1) For a UniProt accession, get every predicted ligand binding site with raw scores and confidence levels, together with information on whether a residue is also on a PPI interface and if there are known variants
 
