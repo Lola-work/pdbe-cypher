@@ -1,6 +1,11 @@
-# pdbe-cypher
+## pdbe-cypher
 
-Cypher queries examples for PDBe Neo4j graph database
+# Files included in repo:
+
+- pdbe_cypher_queries.cql - cypher queries for PDBe and PDBe-KB. Applications of the graph database to biological questions.
+- meta-queries.cql - miscellaneous queries and useful tips and tricks 
+
+# Cypher queries examples for PDBe Neo4j graph database
 
 1) For a UniProt accession, get every predicted ligand binding site with raw scores and confidence levels, together with information on whether a residue is also on a PPI interface and if there are known variants
 
@@ -33,3 +38,6 @@ Cypher queries examples for PDBe Neo4j graph database
 13) UniProt range on one side, Pfam domain on the other side, list of PDB, chain?
 
 14) Monomeric PDBs with single CATH domain
+
+# Meta Queries
+- Find shortest path between two graph nodes in a Neo4j database.
