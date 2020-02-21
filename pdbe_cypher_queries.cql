@@ -105,6 +105,11 @@ RETURN DISTINCT pr1.UNIQID, r1.AUTH_SEQ_ID, pr1.CHEM_COMP_ID, ch1.AUTH_ASYM_ID, 
 
 //14) Monomeric PDBs with single CATH domain
 
+MATCH (a:Assembly {NAME: 'monomer'})<-[:IS_PART_OF_ASSEMBLY]-(en:Entity)<-[:HAS_ENTITY]-(e:Entry), (en)-[:HAS_PDB_RESIDUE]->(r:PDB_Residue)-[:IS_IN_CATH_DOMAIN]->(c:CATH)
+WITH e, c LIMIT 10000
+WITH e.ID as entry, COLLECT(DISTINCT c.CATHCODE) AS caths WHERE size(caths) = 1
+RETURN entry, caths
+
 //15) All entities from UniRef90 clusters for PDB entry 6cmo
 
 MATCH (entry:Entry {ID:'6cmo'})-[:HAS_ENTITY]->(entity:Entity)-[:HAS_UNIPROT]->(uniprot:UniProt)
