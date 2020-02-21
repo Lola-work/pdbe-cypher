@@ -45,3 +45,32 @@
 
 ## Meta Queries
 - Find shortest path between two graph nodes in a Neo4j database.
+
+
+## Sample Python connector for Neo4J
+
+Sample Python code to connect to Neo4J using [py2neo](https://github.com/technige/py2neo.git) Python package. The code assumes the underlying schema is part of [PDBe Graph Database](https://www.ebi.ac.uk/pdbe/pdbe-kb/schema).
+
+To use this install the necessary Python packages using below command.
+
+<pre>
+$ ./setup.sh
+</pre>
+
+This sets up a Python 3 local environment and installs the Python dependencies. Once the setup is done, run below command to activate the virtual environment.
+
+<pre>
+$ source venv/bin/activate
+</pre>
+
+Then run the sample app using below command.
+
+<pre>
+$ python app/app.py --neo4j_url < NEO4J URL > --neo4j_username < NEO4J USERNAME > --neo4j_password < NEO4J PASSWORD > --uniprot_accession < A UniProt Accession >
+</pre>
+
+If the Neo4J details are not provided through command line arguments, then it expects below as environment variables.
+
+`NEO4J_URL`
+`NEO4J_USERNAME`
+`NEO4J_PASSWORD`
